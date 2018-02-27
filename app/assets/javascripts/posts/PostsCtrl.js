@@ -1,21 +1,20 @@
 angular.module('flapperNews')
 .controller('PostsCtrl', [
   '$scope',
-  '$stateParams',
   'posts',
-  function($scope, $stateParams, posts){
-    $scope.post = posts.posts[$stateParams.id];
+  'post',
+  function($scope, posts, post){
+    $scope.post = post;
     $scope.addComment = function(){
       if ($scope.body === '') { return; }
-      $scope.post.comments.push({
+      posts.addComment(post, {
         body: $scope.body,
-        author: 'user',
-        upvotes: 0
+        author: 'user'
       });
       $scope.body = '';
     }
     $scope.incrementUpvotes = function(comment){
-      comment.upvotes += 1;
+      posts.upvoteComment(post, comment);
     }
   }
 ])
