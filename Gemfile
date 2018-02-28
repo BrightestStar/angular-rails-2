@@ -27,6 +27,11 @@ gem 'bootstrap-sass', '~> 3.3.7'
 gem 'jquery-rails'
 gem 'angular-rails-templates'
 gem 'responders'
+gem 'devise'
+
+source "https://rails-assets.org" do
+  gem "rails-assets-angular-devise"
+end
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

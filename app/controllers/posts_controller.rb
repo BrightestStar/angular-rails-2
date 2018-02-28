@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+  before_action :authenticate_user!, only: [:create, :upvote]
   def index
     respond_with Post.includes(:comments).all
   end
