@@ -9,7 +9,7 @@ angular.module('flapperNews')
       if ($scope.body === '') { return; }
       posts.addComment(post, {
         body: $scope.body,
-        author: 'user'
+        upvotes: 0
       });
       $scope.body = '';
     }

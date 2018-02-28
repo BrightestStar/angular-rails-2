@@ -6,7 +6,6 @@ angular.module('flapperNews')
     $scope.signedIn = Auth.isAuthenticated;
     $scope.logout = Auth.logout;
 
-    console.log(Auth.currentUser());
     Auth.currentUser().then(function(user){
       $scope.user = user;
     })

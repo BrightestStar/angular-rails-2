@@ -32,7 +32,7 @@ angular.module('flapperNews')
 
   o.addComment = function(post, comment) {
     return $http.post('/posts/' + post.id + '/comments.json', comment).then(function(res) {
-      post.comments.push(comment);
+      post.comments.push(res.data);
     })
   }
 
