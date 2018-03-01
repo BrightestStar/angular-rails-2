@@ -1,7 +1,7 @@
 angular.module('flapperNews')
 .controller('MainCtrl', [
-  '$scope', 'posts',
-  function($scope, posts){
+  '$scope', 'posts', 'Auth',
+  function($scope, posts, Auth){
     $scope.posts = posts.posts;
     $scope.addPost = function(){
       if (!$scope.title || $scope.title === '') { return; }
@@ -13,6 +13,7 @@ angular.module('flapperNews')
       $scope.link = '';
     }
     $scope.incrementUpvotes = function(post) {
+      if (post.upvote_user.includes(Auth._currentUser.id)) { return; }
       posts.upvote(post);
     }
   }

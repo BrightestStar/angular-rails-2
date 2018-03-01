@@ -38,7 +38,10 @@ angular.module('flapperNews')
 
   o.upvoteComment = function(post, comment) {
     return $http.put('/posts/' + post.id + '/comments/' + comment.id + '/upvote.json').then(function(res){
-      comment.upvotes += 1;
+      $http.get('/posts/' + post.id + '.json').then(function(res){
+        comment.upvotes = res.data.comments[comment.id - 1].upvotes
+      });
+
     })
   }
 

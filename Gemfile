@@ -28,6 +28,7 @@ gem 'jquery-rails'
 gem 'angular-rails-templates'
 gem 'responders'
 gem 'devise'
+gem 'pry'
 
 source "https://rails-assets.org" do
   gem "rails-assets-angular-devise"

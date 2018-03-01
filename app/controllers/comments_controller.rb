@@ -8,10 +8,15 @@ class CommentsController < ApplicationController
   end
 
   def upvote
-    comment = Comment.find(params[:id])
-    comment.increment!(:upvotes)
+    post = Post.find(params[:post_id])
+    comment = post.comments.find(params[:id])
+    if !comment.upvote_user.include?(current_user.id)
+      comment.upvote_user << current_user.id
+      comment.upvotes += 1
+      comment.save!
+    end
 
-    respond_with comment
+    respond_with post, comment
   end
 
   private

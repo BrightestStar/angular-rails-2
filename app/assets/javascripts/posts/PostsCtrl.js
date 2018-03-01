@@ -3,7 +3,8 @@ angular.module('flapperNews')
   '$scope',
   'posts',
   'post',
-  function($scope, posts, post){
+  'Auth',
+  function($scope, posts, post, Auth){
     $scope.post = post;
     $scope.addComment = function(){
       if ($scope.body === '') { return; }
@@ -14,6 +15,7 @@ angular.module('flapperNews')
       $scope.body = '';
     }
     $scope.incrementUpvotes = function(comment){
+      if (comment.upvote_user.includes(Auth._currentUser.id)) { return; }
       posts.upvoteComment(post, comment);
     }
   }

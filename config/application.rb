@@ -11,6 +11,8 @@ module FlapperNew
     # Use the responders controller from the responders gem
     config.app_generators.scaffold_controller :responders_controller
 
+    config.action_dispatch.perform_deep_munge = false
+
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.1
 
