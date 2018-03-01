@@ -19,8 +19,8 @@ angular.module('flapperNews')
   }
 
   o.upvote = function(post) {
-    return $http.put('/posts/' + post.id + '/upvote.json').then(function(res) {
-      post.upvotes += 1;
+    return $http.post('/posts/' + post.id + '/upvote.json').then(function(res) {
+      post.upvotes = res.data.upvotes;
     })
   }
 
@@ -37,11 +37,20 @@ angular.module('flapperNews')
   }
 
   o.upvoteComment = function(post, comment) {
-    return $http.put('/posts/' + post.id + '/comments/' + comment.id + '/upvote.json').then(function(res){
-      $http.get('/posts/' + post.id + '.json').then(function(res){
-        comment.upvotes = res.data.comments[comment.id - 1].upvotes
-      });
+    return $http.post('/posts/' + post.id + '/comments/' + comment.id + '/upvote.json').then(function(res){
+      comment.upvotes = res.data.upvotes
+    })
+  }
 
+  o.downvote = function(post) {
+    return $http.post('/posts/' + post.id + '/downvote.json').then(function(res) {
+      post.upvotes = res.data.upvotes;
+    })
+  }
+
+  o.downvoteComment = function(post, comment) {
+    return $http.post('/posts/' + post.id + '/comments/' + comment.id + '/downvote.json').then(function(res){
+      comment.upvotes = res.data.upvotes
     })
   }
 

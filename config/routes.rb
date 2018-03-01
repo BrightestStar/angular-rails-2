@@ -2,15 +2,17 @@ Rails.application.routes.draw do
   devise_for :users
   root to: 'application#angular'
 
-  resources :posts, only: [:create, :index, :show, :update] do
-    resources :comments, only: [:create, :update, :show] do
+  resources :posts do
+    resources :comments do
       member do
-        put '/upvote' => 'comments#upvote'
+        post '/upvote' => 'comments#upvote'
+        post '/downvote' => 'comments#downvote'
       end
     end
 
     member do
-      put '/upvote' => 'posts#upvote'
+      post '/upvote' => 'posts#upvote'
+      post '/downvote' => 'posts#downvote'
     end
   end
 end

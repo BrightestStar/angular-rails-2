@@ -19,9 +19,21 @@ class CommentsController < ApplicationController
     respond_with post, comment
   end
 
+  def downvote
+    post = Post.find(params[:post_id])
+    comment = post.comments.find(params[:id])
+    if !comment.downvote_user.include?(current_user.id)
+      comment.downvote_user << current_user.id
+      comment.upvotes -= 1
+      comment.save!
+    end
+
+    respond_with post, comment
+  end
+
   private
 
   def comment_params
-    params.require(:comment).permit(:body)
+    params.require(:comment).permit(:body, :upvote_user, :downvote_user)
   end
 end

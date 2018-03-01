@@ -16,5 +16,9 @@ angular.module('flapperNews')
       if (post.upvote_user.includes(Auth._currentUser.id)) { return; }
       posts.upvote(post);
     }
+    $scope.downVotes = function(post) {
+      if (post.downvote_user.includes(Auth._currentUser.id)) { return; }
+      posts.downvote(post);
+    }
   }
 ])

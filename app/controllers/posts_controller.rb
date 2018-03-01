@@ -23,9 +23,20 @@ class PostsController < ApplicationController
     respond_with post
   end
 
+  def downvote
+    post = Post.find(params[:id])
+    if !post.downvote_user.include?(current_user.id)
+      post.upvotes -= 1
+      post.downvote_user << current_user.id
+      post.save!
+    end
+
+    respond_with post
+  end
+
   private
 
   def post_params
-    params.require(:post).permit(:link, :title, :upvote_user, upvote_user:[])
+    params.require(:post).permit(:link, :title, :upvote_user, :downvote_user)
   end
 end
